@@ -1,0 +1,25 @@
+<main class="main-content">
+  <div class="card">
+    <h1 class="fancy-header">
+      Welcome to {{ title }}!
+    </h1>
+
+    <p class="subtitle">
+      This is your first Angular application, now with extra features.
+    </p>
+
+    <div class="input-group">
+      <label for="titleInput">Change the App Title:</label>
+      <input id="titleInput" [(ngModel)]="title" />
+    </div>
+
+    <h3>Key Features:</h3>
+    <ul>
+      <li *ngFor="let feature of features">{{ feature }}</li>
+    </ul>
+
+    <button (click)="addFeature()">Add a New Feature</button>
+  </div>
+</main>
+
+<router-outlet />

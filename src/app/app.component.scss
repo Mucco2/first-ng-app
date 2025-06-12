@@ -1,0 +1,106 @@
+/* --- Variables --- */
+// Using variables makes it easy to change your app's theme later.
+$primary-color: #007bff;
+$dark-color: #343a40;
+$light-gray: #f4f5f7;
+$text-color: #212529;
+$border-color: #ced4da;
+$base-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+/* --- Base Styles --- */
+:host {
+  font-family: $base-font;
+}
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px;
+  background-color: $light-gray;
+  min-height: 90vh;
+}
+
+/* --- Nested Card Styles --- */
+// With SCSS, we can nest selectors for much cleaner and more readable code.
+.card {
+  background: white;
+  padding: 32px 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+
+  .fancy-header {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, $primary-color, $dark-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 24px;
+  }
+
+  .input-group {
+    margin-bottom: 24px;
+    text-align: left;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: $dark-color;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $border-color;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 24px;
+    text-align: left;
+
+    li {
+      background-color: #e9ecef;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      color: $text-color;
+    }
+  }
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+
+    // The '&' refers to the parent selector (button).
+    // This is a clean way to write :hover and :active states.
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
