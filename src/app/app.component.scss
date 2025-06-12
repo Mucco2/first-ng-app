@@ -1,106 +1,143 @@
 /* --- Variables --- */
-// Using variables makes it easy to change your app's theme later.
-$primary-color: #007bff;
-$dark-color: #343a40;
+$primary-color: #5d3eaf;
+$success-color: #28a745;
+$danger-color: #dc3545;
 $light-gray: #f4f5f7;
-$text-color: #212529;
-$border-color: #ced4da;
-$base-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+$dark-gray: #343a40;
+$white: #fff;
+$border-color: #dee2e6;
+$shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
-/* --- Base Styles --- */
+/* --- Base --- */
 :host {
-  font-family: $base-font;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: $dark-gray;
 }
 
 .main-content {
+  background: linear-gradient(135deg, $primary-color, darken($primary-color, 15%));
+  min-height: 100vh;
+  padding: 40px 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 48px;
-  background-color: $light-gray;
-  min-height: 90vh;
+  align-items: flex-start;
 }
 
-/* --- Nested Card Styles --- */
-// With SCSS, we can nest selectors for much cleaner and more readable code.
-.card {
-  background: white;
-  padding: 32px 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  text-align: center;
+/* --- Main Container --- */
+.todo-container {
+  width: 100%;
   max-width: 600px;
+  background: $white;
+  border-radius: 16px;
+  box-shadow: $shadow;
+  padding: 32px;
+}
 
-  .fancy-header {
+.todo-header {
+  text-align: center;
+  margin-bottom: 24px;
+  h1 {
+    margin: 0;
     font-size: 2.5rem;
-    font-weight: bold;
-    background: linear-gradient(45deg, $primary-color, $dark-color);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
+    color: $primary-color;
   }
-
-  .subtitle {
+  p {
+    margin: 8px 0 0;
+    color: lighten($dark-gray, 30%);
     font-size: 1.1rem;
-    color: #6c757d;
-    margin-bottom: 24px;
   }
+}
 
-  .input-group {
-    margin-bottom: 24px;
-    text-align: left;
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: $dark-color;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid $border-color;
-      border-radius: 6px;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 24px;
-    text-align: left;
-
-    li {
-      background-color: #e9ecef;
-      padding: 12px;
-      border-radius: 6px;
-      margin-bottom: 8px;
-      color: $text-color;
-    }
-  }
-
-  button {
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    padding: 12px 24px;
+/* --- Add Task Form --- */
+.add-task-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  input[type="text"] {
+    flex-grow: 1;
+    border: 2px solid $border-color;
+    border-radius: 8px;
+    padding: 12px;
     font-size: 1rem;
+    transition: border-color 0.2s;
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+  button {
+    background: $primary-color;
+    color: $white;
+    border: none;
+    border-radius: 8px;
+    font-size: 2rem;
     font-weight: bold;
-    border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
-
-    // The '&' refers to the parent selector (button).
-    // This is a clean way to write :hover and :active states.
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    transition: background-color 0.2s;
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background: darken($primary-color, 5%);
+    }
+  }
+}
+
+/* --- Task List --- */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li.task-item, // The selector for our list item in the HTML will be just 'li'
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid $light-gray;
+    transition: background-color 0.2s;
+    &:last-child {
+      border-bottom: none;
+    }
+    .task-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: $primary-color;
+      cursor: pointer;
+    }
+    .task-name {
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    .delete-btn {
+      background: none;
+      border: none;
+      color: lighten($dark-gray, 50%);
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.2s;
+      &:hover {
+        color: $danger-color;
+      }
+    }
+    &:hover .delete-btn {
+      opacity: 1;
     }
 
-    &:active {
-      transform: scale(0.98);
+    // This is the style for a completed task
+    &.completed {
+      .task-name {
+        text-decoration: line-through;
+        color: lighten($dark-gray, 50%);
+      }
     }
   }
 }
