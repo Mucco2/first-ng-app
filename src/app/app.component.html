@@ -32,3 +32,17 @@
     </ul>
   </div>
 </main>
+
+<li *ngFor="let task of tasks" [ngClass]="{ 'completed': task.completed }">
+  <div class="task-content">
+    <input
+      type="checkbox"
+      [(ngModel)]="task.completed"
+      (change)="toggleTaskCompletion()"  title="Toggle task completion"
+    />
+    <span class="task-name">{{ task.name }}</span>
+  </div>
+  <button class="delete-btn" (click)="deleteTask(task)" title="Delete task">
+    &times;
+  </button>
+</li>

@@ -17,38 +17,64 @@ export interface Task {
   styleUrl: './app.component.scss'
 })
 export class App {
-  title = 'Muccos Todo App';
-  // This property will be bound to the input field
+  title = 'Mirsads Todo App';
   newTaskName: string = '';
-
-  // An array of Task objects
   tasks: Task[] = [
     { name: 'Learn Angular basics', completed: false },
     { name: 'Build a simple app', completed: false },
     { name: 'Add more features and styles', completed: false },
     { name: 'Take a break!', completed: false },
     { name: 'Review code and refactor', completed: false },
-    
+    { name: 'finish infotavle', completed: false },
+
   ];
 
-  // A "getter" that calculates the number of remaining tasks on the fly
+  private storageKey = 'my-todo-app-tasks';
+
+  constructor() {
+    this.loadTasks();
+  }
+
   get remainingTasks(): number {
     return this.tasks.filter(task => !task.completed).length;
   }
 
-  // Method to add a new task from the input field
+  private saveTasks() {
+    localStorage.setItem(this.storageKey, JSON.stringify(this.tasks));
+  }
+
+  private loadTasks() {
+    const tasksFromStorage = localStorage.getItem(this.storageKey);
+    if (tasksFromStorage) {
+      this.tasks = JSON.parse(tasksFromStorage);
+    }
+  }
+
   addTask() {
-    // Prevent adding empty tasks
     if (this.newTaskName.trim() === '') {
       return;
     }
     this.tasks.push({ name: this.newTaskName, completed: false });
-    // Clear the input field after adding
     this.newTaskName = '';
+    this.saveTasks();
   }
 
-  // Method to delete a task
   deleteTask(taskToDelete: Task) {
     this.tasks = this.tasks.filter(task => task !== taskToDelete);
+    this.saveTasks();
+  }
+
+  toggleTaskCompletion() {
+    this.saveTasks();
   }
 }
+
+// and persists the task list in local storage.
+// It also calculates the number of remaining tasks and provides methods to save and load tasks from local storage.
+
+
+
+
+
+// Note: The above code is a simple Angular component that manages a todo list.
+// It allows users to add tasks, mark them as completed, and delete them
