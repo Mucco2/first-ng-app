@@ -69,12 +69,10 @@ export class App {
   }
 }
 
-// and persists the task list in local storage.
-// It also calculates the number of remaining tasks and provides methods to save and load tasks from local storage.
 
 
 
 
 
-// Note: The above code is a simple Angular component that manages a todo list.
-// It allows users to add tasks, mark them as completed, and delete them
+
+
