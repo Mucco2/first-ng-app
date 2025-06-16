@@ -17,7 +17,7 @@ export interface Task {
   styleUrl: './app.component.scss'
 })
 export class App {
-  title = 'Mirsads Todo App';
+  title = 'Todo App';
   newTaskName: string = '';
   tasks: Task[] = [
     { name: 'Learn Angular basics', completed: false },

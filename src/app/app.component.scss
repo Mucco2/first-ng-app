@@ -141,3 +141,126 @@ $shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
   }
 }
+
+/* --- Footer Styles --- */
+// Variabler for at sikre konsistens med resten af appens design.
+$footer-bg-color: #212529; // En mørk farve, der passer til temaet
+$footer-text-color: rgba(255, 255, 255, 0.7);
+$footer-link-color: #fff;
+$footer-link-hover-color: #9d8ae3; // En lysere lilla til hover
+
+.footer {
+  background-color: $footer-bg-color;
+  color: $footer-text-color;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-top: auto; // Sørger for, at den skubbes til bunden, hvis indholdet er kort
+  font-size: 0.9rem;
+  // En subtil skygge for at adskille footeren fra indholdet
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: larger;
+  }
+
+  a {
+    color: $footer-link-color;
+    font-weight: 600;
+    font-size: large;
+    text-decoration: none; // Fjerner standard understregning
+    position: relative; // Nødvendig for den animerede understregning
+    padding-bottom: 4px;
+    transition: color 0.3s ease-in-out;
+
+    // En elegant understregning, der vises ved hover
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $footer-link-hover-color;
+      transform: scaleX(0); // Starter usynligt (skaleret til 0)
+      transform-origin: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    // Bruger '&' til at style hover-tilstanden
+    &:hover {
+      color: $footer-link-hover-color;
+
+      // Understregningen skaleres op til fuld bredde ved hover
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.navbar {
+  background-color: $dark-gray;
+  padding: 1rem 1.5rem;
+  box-shadow: $shadow;
+  top: 0;
+  z-index: 1000; // Sørger for at den ligger oven på alt andet indhold
+  align-items: center;
+  text-align: center;
+
+  .navbar-container {
+  display: flex;
+  justify-content: center; // <-- ÆNDRING: Denne linje centrerer alt horisontalt
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; // Mellemrum mellem ikon og tekst
+    color: $white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    .icon {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      // Et simpelt checkmark-ikon lavet med SCSS
+      // Dette er en avanceret teknik, der undgår at skulle loade en billedfil
+      background-color: $primary-color;
+      mask-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+      mask-size: contain;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover .icon {
+      transform: rotate(-10deg) scale(1.1); // Giver en lille, legende effekt
+    }
+  }
+
+  .navbar-nav {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem; // Mellemrum mellem menupunkter
+
+      li a {
+        color: rgba($white, 0.8);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+}

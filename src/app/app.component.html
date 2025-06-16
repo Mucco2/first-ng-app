@@ -1,3 +1,13 @@
+<!-- letsm make a navbar -->
+
+<header class="navbar">
+  <div class="navbar-container">
+    <a href="#" class="navbar-brand">
+      <span class="icon"></span> <span>Todo App</span>
+    </a>
+  </div>
+</header>
+
 <main class="main-content">
   <div class="todo-container">
     <header class="todo-header">
@@ -33,16 +43,9 @@
   </div>
 </main>
 
-<li *ngFor="let task of tasks" [ngClass]="{ 'completed': task.completed }">
-  <div class="task-content">
-    <input
-      type="checkbox"
-      [(ngModel)]="task.completed"
-      (change)="toggleTaskCompletion()"  title="Toggle task completion"
-    />
-    <span class="task-name">{{ task.name }}</span>
-  </div>
-  <button class="delete-btn" (click)="deleteTask(task)" title="Delete task">
-    &times;
-  </button>
-</li>
+<footer class="footer">
+  <p>
+    Created by <a href="https://github.com/Mucco2" target="_blank">Mirsad</a>
+  </p>
+</footer>
+
